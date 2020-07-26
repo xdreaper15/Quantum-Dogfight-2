@@ -1,5 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.InputSystem;
+using System;
+using UnityEngine.Assertions.Must;
+using System.Reflection;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.Animations;
+using UnityEngine.InputSystem.Composites;
 
 [System.Serializable]
 public class PlayerFlightControl : MonoBehaviour
@@ -27,6 +34,14 @@ public class PlayerFlightControl : MonoBehaviour
 	public float bank_rotation_multiplier = 1f; //"Bank Rotation Multiplier", "Bank amount along the Z axis when yaw is applied."
 	
 	public float screen_clamp = 500; //"Screen Clamp (Pixels)", "Once the pointer is more than this many pixels from the center, the input in that direction(s) will be treated as the maximum value."
+
+
+	//"Input Actions", New input actions to replace the oldy UnityEngine.Input
+	public Controls controls;
+	public InputAction fireAction;
+	public InputAction thrustAction;
+	public InputAction rollAction;
+	public InputAction lookAction;
 	
 
 
@@ -48,11 +63,35 @@ public class PlayerFlightControl : MonoBehaviour
 	
 	bool thrust_exists = true;
 	bool roll_exists = true;
-	
-	//---------------------------------------------------------------------------------
-	
-	void Start() {
-	
+
+	public double rollVal = 0f;
+	public double thrustVal = 0f;
+	public Vector2 lookVal = new Vector2();
+	public bool fireVal = false;
+
+    //---------------------------------------------------------------------------------
+    private void Awake()
+    {
+		controls = new Controls();
+
+		fireAction.performed += cxt => OnFire();
+		thrustAction.performed += cxt => OnThrust();
+		thrustAction.performed += cxt => thrustVal = cxt.ReadValue<float>();
+		lookAction.performed += cxt => lookVal = cxt.ReadValue<Vector2>();
+    }
+	private void OnEnable()
+	{
+		controls.Game.Enable();
+	}
+	private void OnDisable()
+	{
+		controls.Game.Disable();
+	}
+	void Start()
+	{
+		
+
+
 		mousePos = new Vector2(0,0);	
 		DZ = CustomPointer.instance.deadzone_radius;
 		
@@ -60,20 +99,88 @@ public class PlayerFlightControl : MonoBehaviour
 
 		//Error handling, in case one of the inputs aren't set up.
 		try {
-			Input.GetAxis("Thrust");
+			//Input.GetAxis("Thrust");
+			thrustAction.ReadValue<double>();
+			print(thrustAction.ReadValue<double>());
 		} catch {
 			thrust_exists = false;
 			Debug.LogError("(Flight Controls) Thrust input axis not set up! Go to Edit>Project Settings>Input to create a new axis called 'Thrust' so the ship can change speeds.");
 		}
 		
 		try {
-			Input.GetAxis("Roll");
+			//Input.GetAxis("Roll");
+			rollAction.ReadValue<double>();
+			print(rollAction.ReadValue<double>());
 		} catch {
 			roll_exists = false;
 			Debug.LogError("(Flight Controls) Roll input axis not set up! Go to Edit>Project Settings>Input to create a new axis called 'Roll' so the ship can roll.");
 		}
 		
 	}
+    public void OnFire()
+    {
+		print("OnFire() - Fire Button was pressed: " + fireAction.ReadValue<bool>());
+
+		if (weapon_hardpoint_1 == null)
+		{
+			Debug.LogError("(FlightControls) Trying to fire weapon, but no hardpoint set up!");
+			return;
+		}
+
+		if (bullet == null)
+		{
+			Debug.LogError("(FlightControls) Bullet GameObject is null!");
+			return;
+		}
+
+		//Shoots it in the direction that the pointer is pointing. Might want to take note of this line for when you upgrade the shooting system.
+		if (Camera.main == null)
+		{
+			Debug.LogError("(FlightControls) Main camera is null! Make sure the flight camera has the tag of MainCamera!");
+			return;
+		}
+
+		GameObject shot1 = (GameObject)GameObject.Instantiate(bullet, weapon_hardpoint_1.position, Quaternion.identity);
+
+		Ray vRay;
+
+		if (!CustomPointer.instance.center_lock)
+			vRay = Camera.main.ScreenPointToRay(CustomPointer.pointerPosition);
+		else
+			vRay = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
+
+
+		RaycastHit hit;
+
+		//If we make contact with something in the world, we'll make the shot actually go to that point.
+		if (Physics.Raycast(vRay, out hit))
+		{
+			shot1.transform.LookAt(hit.point);
+			shot1.GetComponent<Rigidbody>().AddForce((shot1.transform.forward) * 9000f);
+
+			//Otherwise, since the ray didn't hit anything, we're just going to guess and shoot the projectile in the general direction.
+		}
+		else
+		{
+			shot1.GetComponent<Rigidbody>().AddForce((vRay.direction) * 9000f);
+		}
+	}
+
+	public void OnThrust()
+    {
+		thrustVal = controls.Game.Thrust.ReadValue<float>();
+		print("OnThrust() - Thrust button(s) were pressed: " + thrustVal);
+	}
+
+	public void OnRoll()
+    {
+
+    }
+
+	public void OnLook()
+    {
+
+    }
 	
 	
 	void FixedUpdate () {
@@ -90,7 +197,7 @@ public class PlayerFlightControl : MonoBehaviour
 		pitch = Mathf.Clamp(distFromVertical, -screen_clamp - DZ, screen_clamp  + DZ) * pitchYaw_strength;
 		yaw = Mathf.Clamp(distFromHorizontal, -screen_clamp - DZ, screen_clamp  + DZ) * pitchYaw_strength;
 		if (roll_exists)
-			roll = (Input.GetAxis("Roll") * -rollSpeedModifier);
+			roll = /*(Input.GetAxis("Roll")*/ (rollAction.ReadValue<float>() * -rollSpeedModifier);
 			
 		
 		//Getting the current speed.
@@ -99,12 +206,12 @@ public class PlayerFlightControl : MonoBehaviour
 		//If input on the thrust axis is positive, activate afterburners.
 
 		if (thrust_exists) {
-			if (Input.GetAxis("Thrust") > 0) {
+			if (/*Input.GetAxis("Thrust")*/ thrustVal > 0) {
 				afterburner_Active = true;
 				slow_Active = false;
 				currentMag = Mathf.Lerp(currentMag, afterburner_speed, thrust_transition_speed * Time.deltaTime);
 				
-			} else if (Input.GetAxis("Thrust") < 0) { 	//If input on the thrust axis is negatve, activate brakes.
+			} else if (/*Input.GetAxis("Thrust")*/ thrustVal < 0) { 	//If input on the thrust axis is negatve, activate brakes.
 				slow_Active = true;
 				afterburner_Active = false;
 				currentMag = Mathf.Lerp(currentMag, slow_speed, thrust_transition_speed * Time.deltaTime);
@@ -185,55 +292,7 @@ public class PlayerFlightControl : MonoBehaviour
 
 	
 	void Update() {
-	
-		//Please remove this and replace it with a shooting system that works for your game, if you need one.
-		if (Input.GetMouseButtonDown(0)) {
-			fireShot();
-		}
 
-	
-	}
-	
-	
-	public void fireShot() {
-	
-		if (weapon_hardpoint_1 == null) {
-			Debug.LogError("(FlightControls) Trying to fire weapon, but no hardpoint set up!");
-			return;
-		}
-		
-		if (bullet == null) {
-			Debug.LogError("(FlightControls) Bullet GameObject is null!");
-			return;
-		}
-		
-		//Shoots it in the direction that the pointer is pointing. Might want to take note of this line for when you upgrade the shooting system.
-		if (Camera.main == null) {
-			Debug.LogError("(FlightControls) Main camera is null! Make sure the flight camera has the tag of MainCamera!");
-			return;
-		}
-		
-		GameObject shot1 = (GameObject) GameObject.Instantiate(bullet, weapon_hardpoint_1.position, Quaternion.identity);
-		
-		Ray vRay;
-		
-		if (!CustomPointer.instance.center_lock)
-			vRay = Camera.main.ScreenPointToRay(CustomPointer.pointerPosition);
-		else
-			vRay = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
-			
-			
-		RaycastHit hit;
-		
-		//If we make contact with something in the world, we'll make the shot actually go to that point.
-		if (Physics.Raycast(vRay, out hit)) {
-			shot1.transform.LookAt(hit.point);
-			shot1.GetComponent<Rigidbody>().AddForce((shot1.transform.forward) * 9000f);
-		
-		//Otherwise, since the ray didn't hit anything, we're just going to guess and shoot the projectile in the general direction.
-		} else {
-			shot1.GetComponent<Rigidbody>().AddForce((vRay.direction) * 9000f);
-		}
 	
 	}
 	

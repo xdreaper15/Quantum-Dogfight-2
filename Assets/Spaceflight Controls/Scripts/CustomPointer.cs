@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using System.Linq.Expressions;
 
 [System.Serializable]
 public class CustomPointer : MonoBehaviour {
@@ -31,21 +33,31 @@ public class CustomPointer : MonoBehaviour {
 	public Rect deadzone_rect; //Rect representation of the deadzone.
 	
 	public static CustomPointer instance; //The instance of this class (Should only be one)
+
+	public InputControl control;
+	public PlayerFlightControl pfc;
+	public float x_axis, y_axis;
+
+
 	// Use this for initialization
 	
-	void Awake() {	
+	void Awake() {
+
 		pointerPosition = new Vector2 (Screen.width / 2, Screen.height / 2); //Set pointer position to center of screen
 		instance = this;
-	
+
+		control = this.gameObject.GetComponent<InputControl>();
+		pfc = this.gameObject.GetComponent<PlayerFlightControl>();
 	}
 	
 	void Start () {
-	
+
+
 		//Uncomment for Unity 5 to get rid of the warnings.
-		//Cursor.lockState = CursorLockMode.Locked;
-		//Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 		
-		Screen.lockCursor = true;
+		//Screen.lockCursor = true;
 		
 		
 		deadzone_rect = new Rect((Screen.width / 2) - (deadzone_radius), (Screen.height / 2) - (deadzone_radius), deadzone_radius * 2, deadzone_radius * 2);
@@ -59,36 +71,49 @@ public class CustomPointer : MonoBehaviour {
 			
 
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
 
-		if (use_mouse_input) {
-		
-			float x_axis = Input.GetAxis("Mouse X");
-			float y_axis = Input.GetAxis("Mouse Y");
-		
-			if (invert_y_axis)
-				y_axis = -y_axis;
-		
-			//Add the input to the pointer's position
-			pointerPosition += new Vector2(x_axis * mouse_sensitivity_modifier,
-			                               y_axis * mouse_sensitivity_modifier);
-											
-			
-		} else if (use_gamepad_input) {
-			
-			float x_axis = Input.GetAxis("Horizontal");
-			float y_axis = Input.GetAxis("Vertical");
-			
-			if (invert_y_axis)
-				y_axis = -y_axis;
-			
-		
-			pointerPosition += new Vector2(x_axis * thumbstick_speed_modifier * Mathf.Pow(Input.GetAxis("Horizontal"), 2),
-				                               y_axis * thumbstick_speed_modifier * Mathf.Pow(Input.GetAxis("Vertical"), 2));
+		//if (use_mouse_input) {
 
-		}/* else if (use_accelerometer_input) {
+		//	float x_axis = Input.GetAxis("Mouse X");
+		//	float y_axis = Input.GetAxis("Mouse Y");
+
+		//	if (invert_y_axis)
+		//		y_axis = -y_axis;
+
+		//	//Add the input to the pointer's position
+		//	pointerPosition += new Vector2(x_axis * mouse_sensitivity_modifier,
+		//	                               y_axis * mouse_sensitivity_modifier);
+
+
+		//} else if (use_gamepad_input) {
+
+		//	float x_axis = Input.GetAxis("Horizontal");
+		//	float y_axis = Input.GetAxis("Vertical");
+
+		//	if (invert_y_axis)
+		//		y_axis = -y_axis;
+
+
+		float x_axis = pfc.lookVal.x;
+		float y_axis = pfc.lookVal.y;
+
+		if (invert_y_axis)
+			y_axis = -y_axis;
+
+		if (Mouse.current.wasUpdatedThisFrame)
+			pointerPosition += new Vector2(x_axis * mouse_sensitivity_modifier, y_axis * mouse_sensitivity_modifier);
+			
+		try
+		{
+			if (Gamepad.current.wasUpdatedThisFrame)
+				pointerPosition += new Vector2(x_axis * thumbstick_speed_modifier * Mathf.Pow(/*Input.GetAxis("Horizontal")*/ x_axis, 2),
+												y_axis * thumbstick_speed_modifier * Mathf.Pow(/*Input.GetAxis("Vertical")*/ y_axis, 2)); 
+		}
+			/* else if (use_accelerometer_input) {
 			//WARNING: UNTESTED.
 			//This /should/ be fairly close to working, though.
 			//I would have tested this, but apparently Unity couldn't detect my Windows Phone 8 SDK.
@@ -100,15 +125,19 @@ public class CustomPointer : MonoBehaviour {
 		
 			pointerPosition += new Vector2(x_axis * thumbstick_speed_modifier * Mathf.Pow(Input.GetAxis("Horizontal"), 2),
 			                               y_axis * thumbstick_speed_modifier * Mathf.Pow(Input.GetAxis("Vertical"), 2));
-			
+			*/
+
+        catch
+        {
+
+        };
 		
 		
-		}*/
 		
 		//If the pointer returns to the center of the screen and it's not in the deadzone...
 		if (pointer_returns_to_center && !deadzone_rect.Contains(pointerPosition)) {
 			//If there's no input and instant snapping is on...
-			if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0 && instant_snapping) {
+			if (/*Input.GetAxis("Horizontal)"*/ pfc.lookVal.x == 0 && /*Input.GetAxis("Vertical")*/ pfc.lookVal.y == 0 && instant_snapping) {
 				pointerPosition = new Vector2 (Screen.width / 2, Screen.height / 2); //Place pointer at the center.
 			
 			
