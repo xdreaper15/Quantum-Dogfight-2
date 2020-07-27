@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 5bb2dc51636d8b742be80d2166da64fb, type: 2}
+  m_LightingSettings: {fileID: 483033236}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 74538363}
   - component: {fileID: 74538362}
   - component: {fileID: 74538364}
+  - component: {fileID: 74538365}
   m_Layer: 2
   m_Name: Example Container
   m_TagString: Untagged
@@ -183,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2bfa72b8825cbe40ae2877700f6e437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   actual_model: {fileID: 1013142480}
   weapon_hardpoint_1: {fileID: 742743257}
   bullet: {fileID: 100000, guid: 66405a5a840355b489214db60c64d3b5, type: 3}
@@ -203,6 +205,42 @@ MonoBehaviour:
   pitch: 0
   afterburner_Active: 0
   slow_Active: 0
+  fireAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  thrustAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  rollAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  lookAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  _fire: 0
+  _thrust: 0
+  _roll: 0
+  _look: {x: 0, y: 0}
 --- !u!4 &74538363
 Transform:
   m_ObjectHideFlags: 0
@@ -235,6 +273,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &74538365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 74538361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: ad458212412bb0f41b2da51e24e0d2d3, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: KBM
+  m_DefaultActionMap: Game
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 509138648}
 --- !u!1 &133204230
 GameObject:
   m_ObjectHideFlags: 0
@@ -5433,6 +5501,67 @@ Transform:
   m_Father: {fileID: 668038707}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!850595691 &483033236
+LightingSettings:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Settings.lighting
+  serializedVersion: 2
+  m_GIWorkflowMode: 1
+  m_EnableBakedLightmaps: 1
+  m_EnableRealtimeLightmaps: 0
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 0
+  m_BakeBackend: 0
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 50
+  m_Padding: 2
+  m_TextureCompression: 0
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 0
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 1
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 1
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 1024
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 512
+  m_PVREnvironmentSampleCount: 512
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRRussianRouletteStartBounce: 2
+  m_PVREnvironmentMIS: 0
+  m_PVRFilteringMode: 0
+  m_PVRDenoiserTypeDirect: 0
+  m_PVRDenoiserTypeIndirect: 0
+  m_PVRDenoiserTypeAO: 0
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1 &502859210
 GameObject:
   m_ObjectHideFlags: 0
@@ -10228,6 +10357,22 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &509138644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400002, guid: 01905e84d0889c14098c595bba008c58, type: 3}
+  m_PrefabInstance: {fileID: 1149328440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ebfb170970604408291b4728c5244d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!20 &509138648 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2000000, guid: 01905e84d0889c14098c595bba008c58, type: 3}
+  m_PrefabInstance: {fileID: 1149328440}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &598413306
 GameObject:
   m_ObjectHideFlags: 0
@@ -20325,11 +20470,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 01905e84d0889c14098c595bba008c58, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.81930006
+      value: 1.8193
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 01905e84d0889c14098c595bba008c58, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.27900028
+      value: -8.279
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 01905e84d0889c14098c595bba008c58, type: 3}
       propertyPath: m_LocalRotation.x
@@ -20351,6 +20496,14 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 01905e84d0889c14098c595bba008c58, type: 3}
+      propertyPath: cp
+      value: 
+      objectReference: {fileID: 509138644}
+    - target: {fileID: 11400000, guid: 01905e84d0889c14098c595bba008c58, type: 3}
+      propertyPath: pfc
+      value: 
+      objectReference: {fileID: 74538362}
     - target: {fileID: 11400002, guid: 01905e84d0889c14098c595bba008c58, type: 3}
       propertyPath: use_mouse_input
       value: 1

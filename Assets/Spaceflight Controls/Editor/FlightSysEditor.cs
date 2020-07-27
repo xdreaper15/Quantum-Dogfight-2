@@ -127,7 +127,7 @@ public class CustomPointerEditor : Editor
 		
 		EditorGUILayout.Separator();
 		
-		pointer.invert_y_axis = EditorGUILayout.Toggle(new GUIContent("Invert Y Axis", "Inverts Y input."), pointer.invert_y_axis);
+		pointer.invert_yAxis = EditorGUILayout.Toggle(new GUIContent("Invert Y Axis", "Inverts Y input."), pointer.invert_yAxis);
 		
 	
 		EditorGUILayout.Separator();

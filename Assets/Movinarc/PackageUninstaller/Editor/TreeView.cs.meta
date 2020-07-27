@@ -1,15 +1,9 @@
 fileFormatVersion: 2
-guid: 558f791b0ffe35843a4f202585a772ad
-labels:
-- Camera
-- Ship
-- Space
+guid: b8af78ecf2ff5412899ebae776c9686e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - target: {instanceID: 0}
-  - control: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class DemoUI : MonoBehaviour {
+public class DemoUI : MonoBehaviour 
+{
 
 	bool cursorlock = true;
 	public PlayerFlightControl pfc;

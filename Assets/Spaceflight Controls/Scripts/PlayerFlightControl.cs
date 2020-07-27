@@ -1,12 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.InputSystem;
-using System;
-using UnityEngine.Assertions.Must;
-using System.Reflection;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.Animations;
-using UnityEngine.InputSystem.Composites;
 
 [System.Serializable]
 public class PlayerFlightControl : MonoBehaviour
@@ -72,8 +65,15 @@ public class PlayerFlightControl : MonoBehaviour
 	public Vector2 lookVal = new Vector2();
 	public bool fireVal = false;
 
-    //---------------------------------------------------------------------------------
-    private void Awake()
+	//"Input Actions", New input actions to replace the oldy UnityEngine.Input
+	public Controls controls;
+	public InputAction fireAction, thrustAction, rollAction, lookAction;
+	public float _fire, _thrust, _roll;
+	public Vector2 _look;
+
+
+	//---------------------------------------------------------------------------------
+	private void Awake()
     {
 		controls = new Controls();
 	}
@@ -110,7 +110,8 @@ public class PlayerFlightControl : MonoBehaviour
 			//Input.GetAxis("Thrust");
 			thrustAction.ReadValue<double>();
 			print(thrustAction.ReadValue<double>());
-		} catch {
+		}
+		catch {
 			thrust_exists = false;
 			Debug.LogError("(Flight Controls) Thrust input axis not set up! Go to Edit>Project Settings>Input to create a new axis called 'Thrust' so the ship can change speeds.");
 		}
@@ -123,7 +124,18 @@ public class PlayerFlightControl : MonoBehaviour
 			roll_exists = false;
 			Debug.LogError("(Flight Controls) Roll input axis not set up! Go to Edit>Project Settings>Input to create a new axis called 'Roll' so the ship can roll.");
 		}
-		
+    }
+
+    private void OnEnable()
+    {
+        controls.Game.Enable();
+    }
+
+    private void OnDisable() => controls.Game.Disable();
+    public void OnThrust(InputAction.CallbackContext c)
+	{
+		//print("OnThrust() - Thrust button(s) were pressed: " + _thrust);
+		_thrust = c.ReadValue<float>();
 	}
     public void OnFire(InputAction.CallbackContext c)
     {
@@ -216,7 +228,7 @@ public class PlayerFlightControl : MonoBehaviour
 		pitch = Mathf.Clamp(distFromVertical, -screen_clamp - DZ, screen_clamp  + DZ) * pitchYaw_strength;
 		yaw = Mathf.Clamp(distFromHorizontal, -screen_clamp - DZ, screen_clamp  + DZ) * pitchYaw_strength;
 		if (roll_exists)
-			roll = /*(Input.GetAxis("Roll")*/ (rollAction.ReadValue<float>() * -rollSpeedModifier);
+			roll = (_roll * -rollSpeedModifier);
 			
 		
 		//Getting the current speed.
@@ -225,12 +237,12 @@ public class PlayerFlightControl : MonoBehaviour
 		//If input on the thrust axis is positive, activate afterburners.
 
 		if (thrust_exists) {
-			if (/*Input.GetAxis("Thrust")*/ thrustVal > 0) {
+			if (/*Input.GetAxis("Thrust")*/ _thrust > 0) {
 				afterburner_Active = true;
 				slow_Active = false;
 				currentMag = Mathf.Lerp(currentMag, afterburner_speed, thrust_transition_speed * Time.deltaTime);
 				
-			} else if (/*Input.GetAxis("Thrust")*/ thrustVal < 0) { 	//If input on the thrust axis is negatve, activate brakes.
+			} else if (/*Input.GetAxis("Thrust")*/ _thrust < 0) { 	//If input on the thrust axis is negatve, activate brakes.
 				slow_Active = true;
 				afterburner_Active = false;
 				currentMag = Mathf.Lerp(currentMag, slow_speed, thrust_transition_speed * Time.deltaTime);
