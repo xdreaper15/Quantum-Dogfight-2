@@ -63,16 +63,13 @@ public class PlayerFlightControl : MonoBehaviour
 	private void Awake()
     {
 		controls = new Controls();
-		controls.Game.Thrust.performed += _ => OnThrust(_);
-		controls.Game.Roll.performed += _ => OnRoll(_);
-		controls.Game.Fire.performed += _ => OnFire(_);
-		controls.Game.Look.performed += _ => OnLook(_);
 
 
 	}
 	void Start()
 	{
-		instance = new PlayerFlightControl();
+		cp = Camera.main.gameObject.GetComponent<CustomPointer>();
+
 		instance = this;
 
 		mousePos = new Vector2(0,0);	
@@ -104,9 +101,21 @@ public class PlayerFlightControl : MonoBehaviour
     private void OnEnable()
     {
         controls.Game.Enable();
-    }
+		controls.Game.Thrust.performed += _ => OnThrust(_);
+		controls.Game.Roll.performed += _ => OnRoll(_);
+		controls.Game.Fire.performed += _ => OnFire(_);
+		controls.Game.Look.performed += _ => OnLook(_);
 
-    private void OnDisable() => controls.Game.Disable();
+	}
+
+	private void OnDisable()
+	{
+		controls.Game.Thrust.performed -= _ => OnThrust(_);
+		controls.Game.Roll.performed -= _ => OnRoll(_);
+		controls.Game.Fire.performed -= _ => OnFire(_);
+		controls.Game.Look.performed -= _ => OnLook(_);
+		controls.Game.Disable();
+	}
     public void OnThrust(InputAction.CallbackContext c)
 	{
 		//print("OnThrust() - Thrust button(s) were pressed: " + _thrust);

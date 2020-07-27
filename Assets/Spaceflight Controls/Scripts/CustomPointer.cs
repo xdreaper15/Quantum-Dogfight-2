@@ -5,8 +5,7 @@ public class CustomPointer : MonoBehaviour
 {
 
 	[SerializeField]
-	public PlayerFlightControl playerFlightControl;
-	public TextMesh text;
+	public PlayerFlightControl pfc;
 	public Texture pointerTexture; //The image for the pointer, generally a crosshair or dot.
 	public bool use_mouse_input;
 	public bool use_gamepad_input;
@@ -49,6 +48,7 @@ public class CustomPointer : MonoBehaviour
 	void Start()
 	{
 		instance = this;
+		pfc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerFlightControl>();
 
 
 		//Uncomment for Unity 5 to get rid of the warnings.
@@ -75,14 +75,14 @@ public class CustomPointer : MonoBehaviour
 		{
             try
             {
-				print(playerFlightControl._look.x);
+				print(pfc._look.x);
             }
             catch 
             {
 				
             }
-			xAxis = playerFlightControl._look.x;
-			yAxis = playerFlightControl._look.y;
+			xAxis = pfc._look.x;
+			yAxis = pfc._look.y;
 
 			if (invert_yAxis)
 				yAxis = -yAxis;
@@ -93,8 +93,8 @@ public class CustomPointer : MonoBehaviour
 			else if (use_gamepad_input)
 			{
 
-				xAxis = playerFlightControl._look.x;
-				yAxis = playerFlightControl._look.y;
+				xAxis = pfc._look.x;
+				yAxis = pfc._look.y;
 
 				if (invert_yAxis)
 				{
@@ -139,7 +139,7 @@ public class CustomPointer : MonoBehaviour
 			if (pointer_returns_to_center && !deadzone_rect.Contains(pointerPosition))
 			{
 				//If there's no input and instant snapping is on...
-				if (/*Input.GetAxis("Horizontal)"*/ playerFlightControl._look.x == 0 && /*Input.GetAxis("Vertical")*/ playerFlightControl._look.y == 0 && instant_snapping)
+				if (/*Input.GetAxis("Horizontal)"*/ pfc._look.x == 0 && /*Input.GetAxis("Vertical")*/ pfc._look.y == 0 && instant_snapping)
 				{
 					pointerPosition = new Vector2(Screen.width / 2, Screen.height / 2); //Place pointer at the center.
 
@@ -166,7 +166,7 @@ public class CustomPointer : MonoBehaviour
 
     private void OnGUI()
     {
-		var test = playerFlightControl;
+		var test = pfc;
         //Draw the pointer texture.
         if (pointerTexture != null && !center_lock)
             GUI.DrawTexture(new Rect(pointerPosition.x - (pointerTexture.width / 2), Screen.height - pointerPosition.y - (pointerTexture.height / 2), pointerTexture.width, pointerTexture.height), pointerTexture);
