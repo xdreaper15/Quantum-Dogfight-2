@@ -1,15 +1,5 @@
-﻿using BeardedManStudios;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using TMPro;
-using UnityEngine;
-using UnityEngine.Animations;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Composites;
-using UnityEngine.InputSystem.Controls;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -18,7 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Controls controls;
     public Rigidbody rb;
     public GameObject go;
-    public TextMeshProUGUI text;
+    public TextMesh text;
 
     // Start is called before the first frame update
     private void Awake()

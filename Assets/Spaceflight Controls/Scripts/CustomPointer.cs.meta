@@ -6,8 +6,12 @@ labels:
 - Ship
 - Airplane
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - pfc: {instanceID: 0}
+  - text: {instanceID: 0}
+  - pointerTexture: {fileID: 2800000, guid: 15ed754deb91fa04c94e9a55b18a2dba, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
