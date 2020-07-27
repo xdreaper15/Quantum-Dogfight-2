@@ -7,10 +7,12 @@ public class DemoUI : MonoBehaviour {
 
 	bool cursorlock = true;
 	public PlayerFlightControl pfc;
+	public CustomPointer cp;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+		cp = this.gameObject.GetComponent<CustomPointer>();
 	
 	}
 	
@@ -43,12 +45,12 @@ public class DemoUI : MonoBehaviour {
 			cursorlock = !cursorlock;
 		
 		if (/*Input.GetKeyDown(KeyCode.C)*/ Keyboard.current.cKey.isPressed) {
-			CustomPointer.instance.pointer_returns_to_center =  !CustomPointer.instance.pointer_returns_to_center;
+			cp.pointer_returns_to_center =  !cp.pointer_returns_to_center;
 			
 		}
 		
 		if (/*Input.GetKeyDown(KeyCode.L)*/ Keyboard.current.lKey.isPressed) {
-			CustomPointer.instance.center_lock =  !CustomPointer.instance.center_lock;
+			cp.center_lock =  !cp.center_lock;
 			
 		}		
 		

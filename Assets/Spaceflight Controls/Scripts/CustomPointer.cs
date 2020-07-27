@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using System.Linq.Expressions;
+using TMPro;
 
 [System.Serializable]
 public class CustomPointer : MonoBehaviour {
@@ -28,14 +29,15 @@ public class CustomPointer : MonoBehaviour {
 	public float mouse_sensitivity_modifier = 15f; //Speed multiplier for the mouse.
 	
 	public static Vector2 pointerPosition; //Position of the pointer in screen coordinates.
-	
+
 	[HideInInspector]
 	public Rect deadzone_rect; //Rect representation of the deadzone.
 	
-	public static CustomPointer instance; //The instance of this class (Should only be one)
-
-	public InputControl control;
+	public CustomPointer instance; //The instance of this class (Should only be one)
+	public GameObject player;
 	public PlayerFlightControl pfc;
+
+
 	public float x_axis, y_axis;
 
 
@@ -45,13 +47,14 @@ public class CustomPointer : MonoBehaviour {
 
 		pointerPosition = new Vector2 (Screen.width / 2, Screen.height / 2); //Set pointer position to center of screen
 		instance = this;
-
-		control = this.gameObject.GetComponent<InputControl>();
-		pfc = this.gameObject.GetComponent<PlayerFlightControl>();
+		player = GameObject.FindGameObjectWithTag("Player");
+		
 	}
 	
 	void Start () {
 
+		GameObject.FindGameObjectWithTag("Player");
+		pfc = player.GetComponent<PlayerFlightControl>();
 
 		//Uncomment for Unity 5 to get rid of the warnings.
 		Cursor.lockState = CursorLockMode.Locked;

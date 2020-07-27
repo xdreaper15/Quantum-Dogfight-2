@@ -11,6 +11,8 @@ using UnityEngine.InputSystem.Composites;
 [System.Serializable]
 public class PlayerFlightControl : MonoBehaviour
 {
+	[SerializeField]
+	private CustomPointer cp;
 
 	//"Objects", "For the main ship Game Object and weapons"));
 	public GameObject actual_model; //"Ship GameObject", "Point this to the Game Object that actually contains the mesh for the ship. Generally, this is the first child of the empty container object this controller is placed in."
@@ -42,6 +44,7 @@ public class PlayerFlightControl : MonoBehaviour
 	public InputAction thrustAction;
 	public InputAction rollAction;
 	public InputAction lookAction;
+
 	
 
 
@@ -72,6 +75,7 @@ public class PlayerFlightControl : MonoBehaviour
     //---------------------------------------------------------------------------------
     private void Awake()
     {
+
 		controls = new Controls();
 
 		fireAction.performed += cxt => OnFire();
@@ -89,11 +93,12 @@ public class PlayerFlightControl : MonoBehaviour
 	}
 	void Start()
 	{
-		
+
+		cp = Camera.main.gameObject.GetComponent<CustomPointer>();
 
 
 		mousePos = new Vector2(0,0);	
-		DZ = CustomPointer.instance.deadzone_radius;
+		DZ = cp.deadzone_radius;
 		
 		roll = 0; //Setting this equal to 0 here as a failsafe in case the roll axis is not set up.
 
@@ -144,7 +149,7 @@ public class PlayerFlightControl : MonoBehaviour
 
 		Ray vRay;
 
-		if (!CustomPointer.instance.center_lock)
+		if (!cp)
 			vRay = Camera.main.ScreenPointToRay(CustomPointer.pointerPosition);
 		else
 			vRay = Camera.main.ScreenPointToRay(new Vector2(Screen.width / 2f, Screen.height / 2f));
