@@ -5,7 +5,8 @@ public class PSDestroy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Destroy(gameObject, GetComponent<ParticleSystem>().main.duration);
+		if(gameObject.GetComponent<ParticleSystem>())
+			Destroy(gameObject, GetComponent<ParticleSystem>().main.duration);
 	}
 	
 	// Update is called once per frame
