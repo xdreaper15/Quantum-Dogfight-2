@@ -11,8 +11,10 @@ public class DemoUI : MonoBehaviour
 	public CustomPointer cp;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start () 
+	{
+		cp = this.gameObject.GetComponent<CustomPointer>();
+		pfc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerFlightControl>();
 	
 	}
 	
@@ -97,10 +99,12 @@ public class DemoUI : MonoBehaviour
 		GUI.Label(new Rect(10,10, 650,250), "Controls: W/S for thrust, A/D for roll, mouse for pitch/yaw." +
 			          "\nC to toggle pointer centering.\nL to toggle center lock\n1-4 to change scenes\nESC to unlock cursor");
 
-		GUI.Label(new Rect(10, 150, 650, 250), "\nLook: " + pfc._look +
-												"\nRoll: " + pfc._roll +
-												"\nThrust:  " + pfc._thrust +
-												"\nFire: " + pfc._fire);
+		print("wrote GUI values");
+		GUI.Label(new Rect(10, 150, 650, 250), "fireAction: " + pfc.fireVal +
+											  "\nrollAction: " + pfc.rollVal +
+											  "\nlookAction: " + pfc.lookVal +
+											  "\nthrustAction: " + pfc.thrustVal);
+
 		
 	
 	}

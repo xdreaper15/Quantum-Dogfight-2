@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
+using System.Linq.Expressions;
+using TMPro;
 
 public class CustomPointer : MonoBehaviour
 {
@@ -31,25 +34,30 @@ public class CustomPointer : MonoBehaviour
 
 	[HideInInspector]
 	public Rect deadzone_rect; //Rect representation of the deadzone.
-	//public static CustomPointer instance; //The instance of this class (Should only be one)
-	float xAxis, yAxis;
-    public CustomPointer instance;
+	
+	public CustomPointer instance; //The instance of this class (Should only be one)
+	public GameObject player;
+	public PlayerFlightControl pfc;
 
+
+	public float x_axis, y_axis;
 
     // Use this for initialization
 
     void Awake()
 	{
 
-		pointerPosition = new Vector2(Screen.width / 2, Screen.height / 2); //Set pointer position to center of screen
+		pointerPosition = new Vector2 (Screen.width / 2, Screen.height / 2); //Set pointer position to center of screen
+		instance = this;
+		player = GameObject.FindGameObjectWithTag("Player");
 		
-
 	}
 
 	void Start()
 	{
 		instance = this;
 
+		pfc = player.GetComponent<PlayerFlightControl>();
 
 		//Uncomment for Unity 5 to get rid of the warnings.
 		Cursor.lockState = CursorLockMode.Locked;
