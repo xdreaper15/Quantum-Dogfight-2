@@ -67,28 +67,31 @@ public class PlayerFlightControl : MonoBehaviour
 	bool thrust_exists = true;
 	bool roll_exists = true;
 
-	public double rollVal = 0f;
-	public double thrustVal = 0f;
+	public double rollVal = 0;
+	public double thrustVal = 0;
 	public Vector2 lookVal = new Vector2();
 	public bool fireVal = false;
 
     //---------------------------------------------------------------------------------
     private void Awake()
     {
-
 		controls = new Controls();
-
-		fireAction.performed += cxt => OnFire();
-		thrustAction.performed += cxt => OnThrust();
-		thrustAction.performed += cxt => thrustVal = cxt.ReadValue<float>();
-		lookAction.performed += cxt => lookVal = cxt.ReadValue<Vector2>();
-    }
+	}
 	private void OnEnable()
 	{
 		controls.Game.Enable();
+		fireAction.performed += cxt => OnFire(cxt);
+		thrustAction.performed += cxt => OnThrust(cxt);
+		lookAction.performed += cxt => OnLook(cxt);
+		rollAction.performed += cxt => OnRoll(cxt);
+		print("Actions enabled");
 	}
 	private void OnDisable()
 	{
+		fireAction.performed -= cxt => OnFire(cxt);
+		thrustAction.performed -= cxt => OnThrust(cxt);
+		lookAction.performed -= cxt => OnLook(cxt);
+		rollAction.performed -= cxt => OnRoll(cxt);
 		controls.Game.Disable();
 	}
 	void Start()
@@ -122,9 +125,13 @@ public class PlayerFlightControl : MonoBehaviour
 		}
 		
 	}
-    public void OnFire()
+    public void OnFire(InputAction.CallbackContext c)
     {
-		print("OnFire() - Fire Button was pressed: " + fireAction.ReadValue<bool>());
+		print("OnFire() - Fire Button was pressed: " + c.ReadValue<float>());
+		if (c.ReadValue<float>() != 0)
+			fireVal = true;
+		else
+			print("Why is OnFire() trigerring if the FireAction value is 0?@?@?");
 
 		if (weapon_hardpoint_1 == null)
 		{
@@ -171,25 +178,32 @@ public class PlayerFlightControl : MonoBehaviour
 		}
 	}
 
-	public void OnThrust()
+	public void OnThrust(InputAction.CallbackContext c) //not used, thrustVal set on thrustAction.performed
     {
-		thrustVal = controls.Game.Thrust.ReadValue<float>();
-		print("OnThrust() - Thrust button(s) were pressed: " + thrustVal);
+		print("OnThrust() - " + c.ReadValue<float>());
+		thrustVal = c.ReadValue<float>();
 	}
 
-	public void OnRoll()
-    {
+	public void OnRoll(InputAction.CallbackContext c) //not used, thrustVal set on rollAction.performed
+	{
+		print("OnRoll() - " + c.ReadValue<float>());
+		rollVal = c.ReadValue<float>();
+	}
 
-    }
-
-	public void OnLook()
-    {
-
-    }
+	public void OnLook(InputAction.CallbackContext c) //not used, thrustVal set on lookAction.performed
+	{
+		print("OnLook() - " + c.ReadValue<Vector2>());
+		lookVal = c.ReadValue<Vector2>();
+	}
 	
 	
 	void FixedUpdate () {
 		
+		if (fireAction.triggered && fireVal == false)
+        {
+			fireVal = true;
+        }
+
 		if (actual_model == null) {
 			Debug.LogError("(FlightControls) Ship GameObject is null.");
 			return;
@@ -300,6 +314,14 @@ public class PlayerFlightControl : MonoBehaviour
 
 	
 	}
-	
+
+    private void LateUpdate()
+    {
+        if (fireAction.triggered)
+        {
+			fireVal = false;
+        }
+    }
+
 
 }

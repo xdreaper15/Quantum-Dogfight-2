@@ -14,11 +14,7 @@ using UnityEngine.InputSystem.Controls;
 public class NewBehaviourScript : MonoBehaviour
 {
     [SerializeField]
-    public Camera cam;
     public Controls controls;
-    public Rigidbody rb;
-    public GameObject go;
-    public TextMeshProUGUI text;
 
     // Start is called before the first frame update
     private void Awake()

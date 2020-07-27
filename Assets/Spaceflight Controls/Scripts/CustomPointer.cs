@@ -53,7 +53,6 @@ public class CustomPointer : MonoBehaviour {
 	
 	void Start () {
 
-		GameObject.FindGameObjectWithTag("Player");
 		pfc = player.GetComponent<PlayerFlightControl>();
 
 		//Uncomment for Unity 5 to get rid of the warnings.
