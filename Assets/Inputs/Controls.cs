@@ -22,8 +22,8 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""Roll"",
                     ""type"": ""Value"",
                     ""id"": ""8f61841f-4f46-4b13-a0db-173d81c68b17"",
-                    ""expectedControlType"": ""Double"",
-                    ""processors"": """",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""Normalize(min=-1,max=1),AxisDeadzone"",
                     ""interactions"": """"
                 },
                 {
@@ -35,11 +35,19 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""e2de9af5-beaf-451e-b0d5-7c2dc62e5980"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""name"": ""Yaw"",
+                    ""type"": ""Value"",
+                    ""id"": ""5542dfbd-746c-4018-8b57-e4dcf0db551f"",
+                    ""expectedControlType"": ""Double"",
                     ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pitch"",
+                    ""type"": ""Value"",
+                    ""id"": ""e2de9af5-beaf-451e-b0d5-7c2dc62e5980"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": ""Normalize(min=-1,max=1)"",
                     ""interactions"": """"
                 },
                 {
@@ -121,22 +129,22 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4b5c07d5-e839-41a4-b1aa-adaa01a59ab8"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Look"",
+                    ""action"": ""Pitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""36ffbdc2-1b38-464a-aa06-f87fc4326d2e"",
-                    ""path"": ""<Gamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
                     ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertX=false),NormalizeVector2"",
+                    ""processors"": ""Invert"",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Look"",
+                    ""action"": ""Pitch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -163,68 +171,90 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis_KBM"",
-                    ""id"": ""024ac1e8-5fbc-49fe-9118-83aa015b73b5"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Roll"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""6143ace8-282f-48c0-80a3-7df180f7b974"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""name"": """",
+                    ""id"": ""1fd6611d-2678-428a-87a5-33290e9491e2"",
+                    ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
                     ""action"": ""Roll"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e9cdbfe3-1d7d-4630-8c50-d3eb42a57af9"",
+                    ""path"": ""<Gamepad>/leftStick/x"",
+                    ""interactions"": """",
+                    ""processors"": ""Invert"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis_KBM"",
+                    ""id"": ""8674bcc3-f89a-4e9c-b35a-d81f9e112a41"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cc081eb8-118f-46e0-95ad-b0bb153ef256"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Yaw"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""156322b1-3021-45b6-84e0-d45790f697eb"",
+                    ""id"": ""ede7e2f4-5847-43ea-bdea-04c04299045b"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KBM"",
-                    ""action"": ""Roll"",
+                    ""action"": ""Yaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""1D Axis_GP"",
-                    ""id"": ""642337a5-055e-4c5c-ba02-0708b7fdff40"",
+                    ""id"": ""e455835d-e5c4-415b-a166-992a2e8377a2"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Roll"",
+                    ""action"": ""Yaw"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""c074ea48-fe3a-446e-a048-ce669a034be8"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""id"": ""678de98e-a019-4ecd-bec5-8e37536623be"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Roll"",
+                    ""action"": ""Yaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""d73dac0c-79ba-4b9e-9615-79caf1799bde"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""id"": ""d027af54-84cd-4dcd-a015-91033b78fed1"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Roll"",
+                    ""action"": ""Yaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -265,7 +295,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Roll = m_Game.FindAction("Roll", throwIfNotFound: true);
         m_Game_Thrust = m_Game.FindAction("Thrust", throwIfNotFound: true);
-        m_Game_Look = m_Game.FindAction("Look", throwIfNotFound: true);
+        m_Game_Yaw = m_Game.FindAction("Yaw", throwIfNotFound: true);
+        m_Game_Pitch = m_Game.FindAction("Pitch", throwIfNotFound: true);
         m_Game_Fire = m_Game.FindAction("Fire", throwIfNotFound: true);
     }
 
@@ -318,7 +349,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private IGameActions m_GameActionsCallbackInterface;
     private readonly InputAction m_Game_Roll;
     private readonly InputAction m_Game_Thrust;
-    private readonly InputAction m_Game_Look;
+    private readonly InputAction m_Game_Yaw;
+    private readonly InputAction m_Game_Pitch;
     private readonly InputAction m_Game_Fire;
     public struct GameActions
     {
@@ -326,7 +358,8 @@ public class @Controls : IInputActionCollection, IDisposable
         public GameActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Roll => m_Wrapper.m_Game_Roll;
         public InputAction @Thrust => m_Wrapper.m_Game_Thrust;
-        public InputAction @Look => m_Wrapper.m_Game_Look;
+        public InputAction @Yaw => m_Wrapper.m_Game_Yaw;
+        public InputAction @Pitch => m_Wrapper.m_Game_Pitch;
         public InputAction @Fire => m_Wrapper.m_Game_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
@@ -343,9 +376,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Thrust.started -= m_Wrapper.m_GameActionsCallbackInterface.OnThrust;
                 @Thrust.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnThrust;
                 @Thrust.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnThrust;
-                @Look.started -= m_Wrapper.m_GameActionsCallbackInterface.OnLook;
-                @Look.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnLook;
-                @Look.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnLook;
+                @Yaw.started -= m_Wrapper.m_GameActionsCallbackInterface.OnYaw;
+                @Yaw.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnYaw;
+                @Yaw.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnYaw;
+                @Pitch.started -= m_Wrapper.m_GameActionsCallbackInterface.OnPitch;
+                @Pitch.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnPitch;
+                @Pitch.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnPitch;
                 @Fire.started -= m_Wrapper.m_GameActionsCallbackInterface.OnFire;
                 @Fire.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnFire;
                 @Fire.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnFire;
@@ -359,9 +395,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Thrust.started += instance.OnThrust;
                 @Thrust.performed += instance.OnThrust;
                 @Thrust.canceled += instance.OnThrust;
-                @Look.started += instance.OnLook;
-                @Look.performed += instance.OnLook;
-                @Look.canceled += instance.OnLook;
+                @Yaw.started += instance.OnYaw;
+                @Yaw.performed += instance.OnYaw;
+                @Yaw.canceled += instance.OnYaw;
+                @Pitch.started += instance.OnPitch;
+                @Pitch.performed += instance.OnPitch;
+                @Pitch.canceled += instance.OnPitch;
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
@@ -391,7 +430,8 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnRoll(InputAction.CallbackContext context);
         void OnThrust(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnYaw(InputAction.CallbackContext context);
+        void OnPitch(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
     }
 }

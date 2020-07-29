@@ -15,7 +15,8 @@ public class FlightControllerEditor : Editor
 		GUILayout.Label(new GUIContent("Objects", "For the main ship Game Object and weapons"));
 		
 		flightCC.actual_model = (GameObject) EditorGUILayout.ObjectField(new GUIContent("Ship Game Object", "Point this to the Game Object that actually contains the mesh for the ship. Generally, this is the first child of the empty container object this controller is placed in."), flightCC.actual_model, typeof(GameObject), true);
-		flightCC.weapon_hardpoint_1 = (Transform) EditorGUILayout.ObjectField(new GUIContent("Weapon Hardpoint", "Transform for the barrel of the weapon"), flightCC.weapon_hardpoint_1, typeof(Transform), true);
+		flightCC.weapon_hardpoint_1 = (Transform) EditorGUILayout.ObjectField(new GUIContent("Weapon Hardpoint 1", "Transform for the barrel of the weapon"), flightCC.weapon_hardpoint_1, typeof(Transform), true);
+		flightCC.weapon_hardpoint_2 = (Transform)EditorGUILayout.ObjectField(new GUIContent("Weapon Hardpoint 2", "Transform for the barrel of the weapon"), flightCC.weapon_hardpoint_2, typeof(Transform), true);
 		flightCC.bullet = (GameObject) EditorGUILayout.ObjectField(new GUIContent("Projectile Game Object", "Projectile that will be fired from the weapon hardpoint."), flightCC.bullet, typeof(GameObject), true);
 
 		//new GUIContent("", "")
@@ -32,20 +33,7 @@ public class FlightControllerEditor : Editor
 		
 		EditorGUILayout.Separator();
 
-		GUILayout.Label(new GUIContent("Banking", "Visuals only--has no effect on actual movement"));
-
-
-		flightCC.use_banking = EditorGUILayout.BeginToggleGroup(new GUIContent("Use Banking", "The ship will bank when doing turns."), flightCC.use_banking);			
 		
-		flightCC.bank_rotation_speed = EditorGUILayout.FloatField(new GUIContent("Bank Rotation Speed", "Rotation speed along the Z axis when yaw is applied. Higher values will result in snappier banking."), flightCC.bank_rotation_speed);			
-		flightCC.bank_rotation_multiplier = EditorGUILayout.FloatField(new GUIContent("Bank Rotation Multiplier", "Bank amount along the Z axis when yaw is applied."), flightCC.bank_rotation_multiplier);			
-		flightCC.bank_angle_clamp = EditorGUILayout.FloatField(new GUIContent("Bank Angle Clamp", "Maximum angle the spacecraft can rotate along the Z axis."), flightCC.bank_angle_clamp);			
-		EditorGUILayout.EndToggleGroup();
-		
-		
-		EditorGUILayout.Separator();
-		
-		flightCC.screen_clamp = EditorGUILayout.FloatField(new GUIContent("Screen Clamp (Pixels)", "Once the pointer is more than this many pixels from the center, the input in that direction(s) will be treated as the maximum value."), flightCC.screen_clamp);			
 		if (GUI.changed)
 			EditorUtility.SetDirty (target);
 	}
