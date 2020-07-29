@@ -10,7 +10,7 @@
                     "type": "Value",
                     "id": "8f61841f-4f46-4b13-a0db-173d81c68b17",
                     "expectedControlType": "Axis",
-                    "processors": "Normalize(min=-1,max=1),AxisDeadzone",
+                    "processors": "Normalize(min=-1,max=1),AxisDeadzone(max=0.15)",
                     "interactions": ""
                 },
                 {

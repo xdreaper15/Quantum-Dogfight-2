@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerFlightControl : MonoBehaviour
 {
 	public PlayerFlightControl instance;
-	public static CustomPointer cp;
 	
 
 	//"Objects", "For the main ship Game Object and weapons"));
@@ -59,8 +58,6 @@ public class PlayerFlightControl : MonoBehaviour
 	}
 	void Start()
 	{
-		cp = Camera.main.gameObject.GetComponent<CustomPointer>();
-
 		instance = this;
 
 		roll = 0; //Setting this equal to 0 here as a failsafe in case the roll axis is not set up.
@@ -232,25 +229,25 @@ public class PlayerFlightControl : MonoBehaviour
 			if ( _thrust > 0) {
 				afterburner_Active = true;
 				slow_Active = false;
-				currentMag = Mathf.Lerp(currentMag, afterburner_speed, thrust_transition_speed * Time.deltaTime);
+				currentMag = Mathf.Lerp(currentMag, afterburner_speed, thrust_transition_speed * Time.fixedDeltaTime);
 				
 			} else if ( _thrust < 0) { 	//If input on the thrust axis is negatve, activate brakes.
 				slow_Active = true;
 				afterburner_Active = false;
-				currentMag = Mathf.Lerp(currentMag, slow_speed, thrust_transition_speed * Time.deltaTime);
+				currentMag = Mathf.Lerp(currentMag, slow_speed, thrust_transition_speed * Time.fixedDeltaTime);
 				
 			} else {
 				slow_Active = false;
 				afterburner_Active = false;
-				currentMag = Mathf.Lerp(currentMag, speed, thrust_transition_speed * Time.deltaTime);
+				currentMag = Mathf.Lerp(currentMag, speed, thrust_transition_speed * Time.fixedDeltaTime);
 			}
 		}
 				
 		//Apply all these values to the rigidbody on the container.
 		GetComponent<Rigidbody>().AddRelativeTorque(
-			(pitch * turnspeed * Time.deltaTime),
-			(yaw * turnspeed * Time.deltaTime),
-			(roll * turnspeed *  (rollSpeedModifier / 2) * Time.deltaTime));
+			(pitch * turnspeed * Time.fixedDeltaTime),
+			(yaw * turnspeed * Time.fixedDeltaTime),
+			(roll * turnspeed *  (rollSpeedModifier / 2) * Time.fixedDeltaTime));
 		
 		GetComponent<Rigidbody>().velocity = transform.forward * currentMag; //Apply speed
 	}
