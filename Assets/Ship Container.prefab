@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551820515147911365}
-  m_LocalRotation: {x: 0.019778142, y: 0.00000003447316, z: -6.819484e-10, w: 0.99980444}
+  m_LocalRotation: {x: -0.026564298, y: -0, z: -0, w: 0.99964714}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 75
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: 0, y: 0.64, z: -8.09}
+  m_FollowOffset: {x: 0, y: -0.86, z: -8.09}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: 0, y: 0.64, z: -8.09}
+  m_FollowOffset: {x: 0, y: -0.86, z: -8.09}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: 0, y: 0.64, z: -8.09}
+  m_FollowOffset: {x: 0, y: -0.86, z: -8.09}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -476,7 +476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4921188916135224930}
-  m_LocalRotation: {x: 0.0015889173, y: -3.9734226e-11, z: 6.3134475e-14, w: 0.99999875}
+  m_LocalRotation: {x: -0.06481327, y: -1e-45, z: -0, w: 0.99789745}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 75
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -550,7 +550,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5435035449400817569}
-  m_LocalRotation: {x: 0.019937046, y: -0.000000034239235, z: 6.827649e-10, w: 0.9998013}
+  m_LocalRotation: {x: -0.02622931, y: -0.00000011183736, z: -0.0000000029344267, w: 0.99965596}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -586,7 +586,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 75
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -611,6 +611,7 @@ GameObject:
   - component: {fileID: 9185325369096233613}
   - component: {fileID: 9217602881495752133}
   - component: {fileID: 6549487852340156658}
+  - component: {fileID: 8442673963769142745}
   m_Layer: 2
   m_Name: Canvas
   m_TagString: Untagged
@@ -627,16 +628,16 @@ RectTransform:
   m_GameObject: {fileID: 5662027851949478040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1920688344511300743}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!222 &9217602881495752133
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -679,6 +680,27 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: TEST
+--- !u!223 &8442673963769142745
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5662027851949478040}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 4858770155731924186}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &6449190683666465216
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +728,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6449190683666465216}
-  m_LocalRotation: {x: 0.019937048, y: -0.000000034239243, z: 6.827651e-10, w: 0.9998013}
+  m_LocalRotation: {x: -0.026229315, y: -0.000000111837366, z: -0.0000000029344271, w: 0.99965596}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -739,7 +761,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 40
+  field of view: 75
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1083,20 +1105,15 @@ MonoBehaviour:
   instance: {fileID: 0}
   actual_model: {fileID: 8442673964157942624}
   weapon_hardpoint_1: {fileID: 8442673964158101332}
-  weapon_hardpoint_2: {fileID: 0}
+  weapon_hardpoint_2: {fileID: 8442673964158101316}
   bullet: {fileID: 100000, guid: 66405a5a840355b489214db60c64d3b5, type: 3}
   speed: 20
   afterburner_speed: 55
   slow_speed: 8
   thrust_transition_speed: 2
   turnspeed: 15
-  rollSpeedModifier: 12
-  pitchYaw_strength: 0.5
-  use_banking: 0
-  bank_angle_clamp: 360
-  bank_rotation_speed: 3
-  bank_rotation_multiplier: 1
-  screen_clamp: 400
+  rollSpeedModifier: 8
+  pitchYaw_strength: 50
   roll: 0
   yaw: 0
   pitch: 0
@@ -1126,7 +1143,15 @@ MonoBehaviour:
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
-  lookAction:
+  yawAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+  pitchAction:
     m_Name: 
     m_Type: 0
     m_ExpectedControlType: 
@@ -20828,7 +20853,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9132919215383091747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.64, z: -6.7000003}
+  m_LocalPosition: {x: 0, y: -0.86, z: -6.7000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1920688344511300743}
@@ -20860,7 +20885,7 @@ MonoBehaviour:
   m_Follow: {fileID: 8442673964158101312}
   m_CommonLens: 1
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 75
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -20928,11 +20953,11 @@ MonoBehaviour:
   m_BindingMode: 3
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 3.8
+  - m_Height: 1.52
     m_Radius: 4.85
-  - m_Height: 2.32
+  - m_Height: 0
     m_Radius: 6.78
-  - m_Height: 0.64
+  - m_Height: -0.86
     m_Radius: 8.09
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
