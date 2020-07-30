@@ -476,7 +476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4921188916135224930}
-  m_LocalRotation: {x: 0.056946103, y: -0.000000017178458, z: 9.798363e-10, w: 0.99837726}
+  m_LocalRotation: {x: 0.056946103, y: 0.000000017178458, z: -9.798363e-10, w: 0.99837726}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1134,6 +1134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 8442673964169219716}
+  jetDamage: {fileID: 8525281338006301801}
   actual_model: {fileID: 8442673964157942624}
   weapon_hardpoint_1: {fileID: 8442673964158101332}
   weapon_hardpoint_2: {fileID: 8442673964158101316}
@@ -1334,6 +1335,9 @@ MonoBehaviour:
   Instance: {fileID: 8498849501304439004}
   rb: {fileID: 8442673964160997380}
   jetDamage: {fileID: 0}
+  currentHealth: 0
+  currentAmmo: 0
+  reloading: 0
 --- !u!114 &8525281338006301801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,6 +1356,8 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   currentHealth: 0
   currentAmmo: 0
+  reloading: 0
+  _bullet: {fileID: 100000, guid: 66405a5a840355b489214db60c64d3b5, type: 3}
 --- !u!1 &8442673964157942632
 GameObject:
   m_ObjectHideFlags: 0

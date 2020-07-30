@@ -793,9 +793,6 @@ public class SimpleHealthBarWindow : EditorWindow
 
 				// Set the version to current so they won't see these version changes.
 				EditorPrefs.SetInt( "SimpleHealthBarFreeVersion", importantChanges );
-
-				introThumbnailPage = new WWW( "https://www.tankandhealerstudio.com/uploads/7/7/4/9/77490188/shb-free-intro-thumb-small_orig.png" );
-
 				EditorApplication.update += WaitForIntroThumbnail;
 			}
 			else if( EditorPrefs.GetInt( "SimpleHealthBarFreeVersion" ) < importantChanges )

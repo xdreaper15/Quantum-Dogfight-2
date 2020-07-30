@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerFlightControl : MonoBehaviour
 {
 	public PlayerFlightControl instance;
+	public JetDamage jetDamage;
 	
 
 	//"Objects", "For the main ship Game Object and weapons"));
@@ -128,15 +129,10 @@ public class PlayerFlightControl : MonoBehaviour
     }
 	public void OnFire(InputAction.CallbackContext c)
 	{
-		Debug.DrawRay(weapon_hardpoint_1.position, weapon_hardpoint_1.forward * 100f, Color.red, 3);
-		Debug.DrawRay(weapon_hardpoint_2.position, weapon_hardpoint_1.forward * 100f, Color.red, 3);
-
-		//print("OnFire() - Fire Button was pressed: " + c.ReadValue<float>());
 		_fire = c.ReadValue<float>();
 
-		//don't fire if the button isn't pressed.
-		if (_fire == 0) return; 
-
+		//don't fire if one of the following is true:
+		if (_fire == 0) return;
 		if (weapon_hardpoint_1 == null || weapon_hardpoint_2 == null)
 		{
 			Debug.LogError("(FlightControls) Trying to fire weapon, but no hardpoint set up!");
@@ -147,36 +143,13 @@ public class PlayerFlightControl : MonoBehaviour
 			Debug.LogError("(FlightControls) Bullet GameObject is null!");
 			return;
 		}
-		//Shoots it in the direction that the pointer is pointing. Might want to take note of this line for when you upgrade the shooting system.
 		if (Camera.main == null)
 		{
 			Debug.LogError("(FlightControls) Main camera is null! Make sure the flight camera has the tag of MainCamera!");
 			return;
 		}
 
-		GameObject shot1 = (GameObject)GameObject.Instantiate(bullet, weapon_hardpoint_1.position, Quaternion.identity);
-		GameObject shot2 = (GameObject)GameObject.Instantiate(bullet, weapon_hardpoint_2.position, Quaternion.identity);
-
-		Ray vRay1 = new Ray(weapon_hardpoint_1.position, weapon_hardpoint_1.forward);
-		Ray vRay2 = new Ray(weapon_hardpoint_2.position, weapon_hardpoint_2.forward);		
-
-		RaycastHit hit;
-
-		//If we make contact with something in the world, we'll make the shot actually go to that point.
-		if (Physics.Raycast(vRay1, out hit) || Physics.Raycast(vRay2, out hit))
-		{
-			shot1.transform.LookAt(hit.point);
-			shot2.transform.LookAt(hit.point);
-			shot1.GetComponent<Rigidbody>().AddForce(shot1.transform.forward * 9000f);
-			shot2.GetComponent<Rigidbody>().AddForce(shot1.transform.forward * 9000f);
-
-			//Otherwise, since the ray didn't hit anything, we're just going to guess and shoot the projectile in the general direction.
-		}
-		else
-		{
-			shot1.GetComponent<Rigidbody>().AddForce(vRay1.direction * 9000f);
-			shot2.GetComponent<Rigidbody>().AddForce(vRay2.direction * 9000f);
-		}
+		jetDamage.Fire(weapon_hardpoint_1, weapon_hardpoint_2, bullet);
 	}
 
 	void FixedUpdate () 

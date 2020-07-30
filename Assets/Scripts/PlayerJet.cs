@@ -1,5 +1,6 @@
 ﻿using BeardedManStudios.Forge.Networking;
 using BeardedManStudios.Forge.Networking.Generated;
+using BeardedManStudios.Forge.Networking.Unity;
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ public class PlayerJet : PlayerJetBehavior
         Debug.Log("PlayerJet Awake!");
         if (Instance = null)
             Instance = this;
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class PlayerJet : PlayerJetBehavior
             pi.enabled = false;
             c_FL.enabled = false;
             cam.SetActive(false);
+            cam.GetComponent<AudioListener>().enabled = false;
         }
     }
     private void Update()
@@ -58,9 +61,19 @@ public class PlayerJet : PlayerJetBehavior
         }
     }
 
+    /// <summary>
+	/// Used to move the cube that this script is attached to up
+	/// </summary>
+	/// <param name="args">null</param>
     public override void Fire(RpcArgs args)
     {
-        networkObject.SendRpc(RPC_FIRE, Receivers.All);
-
+        // RPC calls are not made from the main thread for performance, since we
+        // are interacting with Unity engine objects, we will need to make sure
+        // to run the logic on the main thread
+        MainThreadManager.Run(() =>
+        {
+            //we need to make the Jet Fire() here;
+            jetDamage.Fire();
+        });
     }
 }

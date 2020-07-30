@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -282,7 +283,7 @@ namespace BeardedManStudios.Forge.Networking
 			MessageGroup = messageGroup;
 		}
 
-		public void OnDisconnect()
+		public void OnDisconnect(NetworkingPlayer player, NetWorker sender)
 		{
 			Disconnected = true;
 			Connected = false;
@@ -468,5 +469,10 @@ namespace BeardedManStudios.Forge.Networking
 		{
 			return UniqueReliableMessageIdCounter++;
 		}
-	}
+
+        internal void OnDisconnect()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
