@@ -1,4 +1,5 @@
-﻿using BeardedManStudios.Forge.Networking.Generated;
+﻿using BeardedManStudios.Forge.Networking;
+using BeardedManStudios.Forge.Networking.Generated;
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ public class PlayerJet : PlayerJetBehavior
     public GameObject cam;
     public PlayerJet Instance;
     public Rigidbody rb;
+    public JetDamage jetDamage;
 
     private void Awake()
     {
@@ -47,5 +49,9 @@ public class PlayerJet : PlayerJetBehavior
             networkObject.position = transform.position;
             networkObject.rotation = transform.rotation;
         }
+    }
+
+    public override void Fire(RpcArgs args)
+    {
     }
 }

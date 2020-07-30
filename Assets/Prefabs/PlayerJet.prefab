@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551820515147911365}
-  m_LocalRotation: {x: 0.095124185, y: -5.3626978e-30, z: -3.660597e-30, w: 0.99546546}
+  m_LocalRotation: {x: 0.095124185, y: 1e-45, z: -0, w: 0.99546546}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -476,7 +476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4921188916135224930}
-  m_LocalRotation: {x: 0.056946103, y: 0.000000017178458, z: -9.798362e-10, w: 0.99837726}
+  m_LocalRotation: {x: 0.056946103, y: -0.000000017178458, z: 9.798363e-10, w: 0.99837726}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1333,6 +1333,7 @@ MonoBehaviour:
   cam: {fileID: 6449190683666465216}
   Instance: {fileID: 8498849501304439004}
   rb: {fileID: 8442673964160997380}
+  jetDamage: {fileID: 0}
 --- !u!114 &8525281338006301801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1342,9 +1343,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8442673964157942630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 809a28ec9d1128848bc4753a14afc8b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f7bbc94e513ab8438132a888ead45bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 8442673964160997380}
+  tr: {fileID: 8442673964158101318}
+  pfc: {fileID: 8442673964169219716}
+  healthBar: {fileID: 0}
+  currentHealth: 0
+  currentAmmo: 0
 --- !u!1 &8442673964157942632
 GameObject:
   m_ObjectHideFlags: 0
