@@ -17,6 +17,9 @@ public class PlayerJet : PlayerJetBehavior
     public Rigidbody rb;
     public JetDamage jetDamage;
 
+    public int currentHealth, currentAmmo;
+    public bool reloading;
+
     private void Awake()
     {
         Debug.Log("PlayerJet Awake!");
@@ -35,7 +38,10 @@ public class PlayerJet : PlayerJetBehavior
             cam.SetActive(false);
         }
     }
-
+    private void Update()
+    {
+        
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -43,6 +49,7 @@ public class PlayerJet : PlayerJetBehavior
         {
             transform.position = networkObject.position;
             transform.rotation = networkObject.rotation;
+
         }
         if(networkObject.IsOwner)
         {
@@ -53,5 +60,7 @@ public class PlayerJet : PlayerJetBehavior
 
     public override void Fire(RpcArgs args)
     {
+        networkObject.SendRpc(RPC_FIRE, Receivers.All);
+
     }
 }

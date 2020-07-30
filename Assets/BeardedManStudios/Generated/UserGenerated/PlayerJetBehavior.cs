@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace BeardedManStudios.Forge.Networking.Generated
 {
-	[GeneratedRPC("{\"types\":[[\"int\", \"int\"]]")]
-	[GeneratedRPCVariableNames("{\"types\":[[\"damage\", \"currentAmmo\"]]")]
+	[GeneratedRPC("{\"types\":[[]]")]
+	[GeneratedRPCVariableNames("{\"types\":[[]]")]
 	public abstract partial class PlayerJetBehavior : NetworkBehavior
 	{
 		public const byte RPC_FIRE = 0 + 5;
@@ -22,7 +22,7 @@ namespace BeardedManStudios.Forge.Networking.Generated
 			networkObject.AttachedBehavior = this;
 
 			base.SetupHelperRpcs(networkObject);
-			networkObject.RegisterRpc("Fire", Fire, typeof(int), typeof(int));
+			networkObject.RegisterRpc("Fire", Fire);
 			RegisterCustomRPCs(networkObject);
 
 			networkObject.onDestroy += DestroyGameObject;
@@ -99,8 +99,6 @@ namespace BeardedManStudios.Forge.Networking.Generated
 
 		/// <summary>
 		/// Arguments:
-		/// int damage
-		/// int currentAmmo
 		/// </summary>
 		public abstract void Fire(RpcArgs args);
 
