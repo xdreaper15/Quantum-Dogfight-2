@@ -22,8 +22,8 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""Roll"",
                     ""type"": ""Value"",
                     ""id"": ""8f61841f-4f46-4b13-a0db-173d81c68b17"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": ""Normalize(min=-1,max=1),AxisDeadzone(max=0.15)"",
+                    ""expectedControlType"": ""Double"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
@@ -46,8 +46,8 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""Pitch"",
                     ""type"": ""Value"",
                     ""id"": ""e2de9af5-beaf-451e-b0d5-7c2dc62e5980"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": ""Normalize(min=-1,max=1)"",
+                    ""expectedControlType"": ""Double"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
@@ -109,7 +109,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""07fb0ac6-4527-4304-a9c4-f5b7b7561497"",
                     ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(min=-1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Thrust"",
                     ""isComposite"": false,
@@ -120,7 +120,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""b7894558-30ef-45e1-8e82-1d1cadc64e18"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(max=1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Thrust"",
                     ""isComposite"": false,
@@ -131,7 +131,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""4b5c07d5-e839-41a4-b1aa-adaa01a59ab8"",
                     ""path"": ""<Mouse>/delta/y"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(min=-1,max=1),Clamp(min=-1,max=1)"",
                     ""groups"": ""KBM"",
                     ""action"": ""Pitch"",
                     ""isComposite"": false,
@@ -142,7 +142,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""36ffbdc2-1b38-464a-aa06-f87fc4326d2e"",
                     ""path"": ""<Gamepad>/leftStick/y"",
                     ""interactions"": """",
-                    ""processors"": ""Invert"",
+                    ""processors"": ""Normalize(min=-1,max=1),Clamp(min=-1,max=1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Pitch"",
                     ""isComposite"": false,
@@ -175,7 +175,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""1fd6611d-2678-428a-87a5-33290e9491e2"",
                     ""path"": ""<Mouse>/delta/x"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(min=-1,max=1),Clamp(min=-1,max=1)"",
                     ""groups"": ""KBM"",
                     ""action"": ""Roll"",
                     ""isComposite"": false,
@@ -186,7 +186,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""id"": ""e9cdbfe3-1d7d-4630-8c50-d3eb42a57af9"",
                     ""path"": ""<Gamepad>/leftStick/x"",
                     ""interactions"": """",
-                    ""processors"": ""Invert"",
+                    ""processors"": ""Normalize(min=-1,max=1),Clamp(min=-1,max=1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Roll"",
                     ""isComposite"": false,
@@ -239,9 +239,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""678de98e-a019-4ecd-bec5-8e37536623be"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(min=-1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Yaw"",
                     ""isComposite"": false,
@@ -250,13 +250,81 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""d027af54-84cd-4dcd-a015-91033b78fed1"",
-                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Normalize(max=1)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Yaw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""611c735f-24f4-4e1d-a89a-7b5f60322fae"",
+            ""actions"": [
+                {
+                    ""name"": ""Click/Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""983faf98-22b6-4581-a810-12cd90786e97"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""45813246-9370-46ca-96bf-d9a0222ccf9b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""848770a6-aac3-4661-b53b-0fae63c2f2cd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Click/Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef82828b-29a5-4798-8e03-d3bb17d9631e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Click/Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4be56ccc-11de-4fa6-976c-6c41926bca4c"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KBM"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c2e925b-999d-4d3d-bac5-68526efdfc1c"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -298,6 +366,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Game_Yaw = m_Game.FindAction("Yaw", throwIfNotFound: true);
         m_Game_Pitch = m_Game.FindAction("Pitch", throwIfNotFound: true);
         m_Game_Fire = m_Game.FindAction("Fire", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_ClickSelect = m_UI.FindAction("Click/Select", throwIfNotFound: true);
+        m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -408,6 +480,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public GameActions @Game => new GameActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_ClickSelect;
+    private readonly InputAction m_UI_Move;
+    public struct UIActions
+    {
+        private @Controls m_Wrapper;
+        public UIActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ClickSelect => m_Wrapper.m_UI_ClickSelect;
+        public InputAction @Move => m_Wrapper.m_UI_Move;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @ClickSelect.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClickSelect;
+                @ClickSelect.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClickSelect;
+                @ClickSelect.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClickSelect;
+                @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ClickSelect.started += instance.OnClickSelect;
+                @ClickSelect.performed += instance.OnClickSelect;
+                @ClickSelect.canceled += instance.OnClickSelect;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KBMSchemeIndex = -1;
     public InputControlScheme KBMScheme
     {
@@ -433,5 +546,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnYaw(InputAction.CallbackContext context);
         void OnPitch(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnClickSelect(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
     }
 }

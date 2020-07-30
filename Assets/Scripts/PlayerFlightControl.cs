@@ -89,6 +89,7 @@ public class PlayerFlightControl : MonoBehaviour
         controls.Game.Enable();
 		controls.Game.Thrust.performed += _ => OnThrust(_);
 		controls.Game.Roll.performed += _ => OnRoll(_);
+		controls.Game.Roll.canceled += _ => OnRoll(_);
 		controls.Game.Fire.performed += _ => OnFire(_);
 		controls.Game.Pitch.performed += _ => OnPitch(_);
 		controls.Game.Pitch.canceled += _ => OnPitch(_);
@@ -101,6 +102,7 @@ public class PlayerFlightControl : MonoBehaviour
 	{
 		controls.Game.Thrust.performed -= _ => OnThrust(_);
 		controls.Game.Roll.performed -= _ => OnRoll(_);
+		controls.Game.Roll.canceled -= _ => OnRoll(_);
 		controls.Game.Fire.performed -= _ => OnFire(_);
 		controls.Game.Pitch.performed -= _ => OnPitch(_);
 		controls.Game.Pitch.canceled -= _ => OnPitch(_);
