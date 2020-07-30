@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1551820515147911365}
-  m_LocalRotation: {x: 0.045397054, y: -0, z: -0, w: 0.998969}
+  m_LocalRotation: {x: 0.095124185, y: -5.3626978e-30, z: -3.660597e-30, w: 0.99546546}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: 0, y: 1.49, z: -8.28}
+  m_FollowOffset: {x: 0, y: 2.87, z: -6.8}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: 0, y: 1.49, z: -8.28}
+  m_FollowOffset: {x: 0, y: 2.87, z: -6.8}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 3
-  m_FollowOffset: {x: 0, y: 1.49, z: -8.28}
+  m_FollowOffset: {x: 0, y: 2.87, z: -6.8}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -476,7 +476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4921188916135224930}
-  m_LocalRotation: {x: 0.00712128, y: 0.000000017337303, z: -1.2346693e-10, w: 0.99997467}
+  m_LocalRotation: {x: 0.056946103, y: 0.000000017178458, z: -9.798362e-10, w: 0.99837726}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -550,7 +550,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5435035449400817569}
-  m_LocalRotation: {x: 0.10881325, y: 0.0011094679, z: -0.000121446, w: 0.9940616}
+  m_LocalRotation: {x: 0.15821701, y: 0.0011014516, z: -0.0001764915, w: 0.98740375}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -728,7 +728,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6449190683666465216}
-  m_LocalRotation: {x: 0.10881325, y: 0.0011094678, z: -0.00012144599, w: 0.9940616}
+  m_LocalRotation: {x: 0.15821701, y: 0.0011014516, z: -0.0001764915, w: 0.9874038}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1080,8 +1080,9 @@ GameObject:
   - component: {fileID: 8442673964169219716}
   - component: {fileID: 8442673964079393473}
   - component: {fileID: 8498849501304439004}
+  - component: {fileID: 8525281338006301801}
   m_Layer: 2
-  m_Name: Ship Container
+  m_Name: PlayerJet
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1216,19 +1217,7 @@ MonoBehaviour:
       m_Calls: []
   m_DeviceRegainedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Component, UnityEngine
-        m_MethodName: BroadcastMessage
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Device Restored
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1253,7 +1242,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8442673964169219716}
         m_TargetAssemblyTypeName: PlayerFlightControl, Assembly-CSharp
-        m_MethodName: OnLook
+        m_MethodName: OnPitch
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1298,7 +1287,19 @@ MonoBehaviour:
     m_ActionId: 8f61841f-4f46-4b13-a0db-173d81c68b17
     m_ActionName: Game/Roll[/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8442673964169219716}
+        m_TargetAssemblyTypeName: PlayerFlightControl, Assembly-CSharp
+        m_MethodName: OnYaw
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
     m_ActionId: 5542dfbd-746c-4018-8b57-e4dcf0db551f
     m_ActionName: Game/Yaw[/Keyboard/a,/Keyboard/d,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/rightStick/left]
   - m_PersistentCalls:
@@ -1332,6 +1333,18 @@ MonoBehaviour:
   cam: {fileID: 6449190683666465216}
   Instance: {fileID: 8498849501304439004}
   rb: {fileID: 8442673964160997380}
+--- !u!114 &8525281338006301801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8442673964157942630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809a28ec9d1128848bc4753a14afc8b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8442673964157942632
 GameObject:
   m_ObjectHideFlags: 0
@@ -20975,7 +20988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9132919215383091747}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.4900017, z: -6.8899994}
+  m_LocalPosition: {x: 0, y: 2.869999, z: -5.4100037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1920688344511300743}
@@ -21075,12 +21088,12 @@ MonoBehaviour:
   m_BindingMode: 3
   m_SplineCurvature: 0.2
   m_Orbits:
-  - m_Height: 2.33
-    m_Radius: 4.85
-  - m_Height: 1.58
-    m_Radius: 6.78
-  - m_Height: 1.49
-    m_Radius: 8.28
+  - m_Height: 2.87
+    m_Radius: 6.8
+  - m_Height: 2.87
+    m_Radius: 6.8
+  - m_Height: 2.87
+    m_Radius: 6.8
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 1217861601265095757}

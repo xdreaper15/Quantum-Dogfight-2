@@ -15,12 +15,6 @@ public class GameLogic : MonoBehaviour
         Debug.Log("GL.Awake");
 
         Application.targetFrameRate = 60;
-
-        //if (NetworkManager.Instance == null)
-        //{
-        //    nm = this.gameObject.GetComponent<NetworkManager>();
-        //    Debug.Log("nm = this...");
-        //}
     }
     // Start is called before the first frame update
     void Start()
@@ -59,6 +53,13 @@ public class GameLogic : MonoBehaviour
                 transform.position += transform.up * Time.fixedDeltaTime * camSens;
             if (kb.eKey.isPressed)
                 transform.position -= transform.up * Time.fixedDeltaTime * camSens;
+            while(Mouse.current.rightButton.isPressed)
+            {
+                gameObject.GetComponent<Camera>().transform.Rotate(new Vector3(
+                                                                    Mathf.Clamp(Mouse.current.delta.ReadValue().x, -1f, 1f) * camSens,
+                                                                    Mathf.Clamp(Mouse.current.delta.ReadValue().y, -1f, 1f) * camSens,
+                                                                    0f), Space.Self);
+            }
         }
     }
 

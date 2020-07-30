@@ -254,7 +254,8 @@ public class PlayerFlightControl : MonoBehaviour
 		GetComponent<Rigidbody>().velocity = transform.forward * currentMag; //Apply speed
 	}
 
-	void Update() {
+	void Update() 
+	{
 		Camera.main.gameObject.GetComponentInChildren<Text>().text = "Thrust: " + _thrust.ToString() +
 																	"\nRoll: " + _roll.ToString() +
 																	"\nPitch: " + _pitch.ToString() +
